@@ -16,7 +16,7 @@ vector<stu> s;
 vector<stu> adv;
 vector<stu> base;
 vector<stu> top;
-map<int , pii> D;
+unordered_map<int , pii> D;
 
 bool cmpa(stu a, stu b){
     return a.g == b.g ? a.id < b.id : a.g > b.g;
@@ -56,25 +56,22 @@ void B(int b){
 }
 
 void C(string  b){
-    unordered_map<int,int> mp;
+    int mp[1100] = {0};
     for(int i=0; i< s.size(); ++i){
         string t = s[i].id.substr(4,6);
         if(b == t){
             string test = s[i].id.substr(1,3);
             int dest = change(test);
             //cout<<dest<<endl;
-            if(mp.find(dest) != mp.end()){
-                mp[dest]++;
-            }else{
-                mp[dest] = 1;
-            }
+            mp[dest]++;
         }
     }
     vector<pii> p;
-    for(auto it = mp.begin(); it != mp.end(); ++it){
-        p.push_back(make_pair(it->first,it->second));
+    for(int i=0 ; i < 1100; ++i){
+        if(mp[i])
+            p.push_back(make_pair(i,mp[i]));
     }
-    sort(p.begin(),p.end(), [](pii a,pii b)->bool{return a.second == b.second ? a.first < b.first : a.second > b.second;});
+    sort(p.begin(),p.end(), [](pii &a,pii &b)->bool{return a.second == b.second ? a.first < b.first : a.second > b.second;});
     for(auto it = p.begin(); it != p.end(); ++it){
         cout<<it->first<<" "<<it->second<<endl;
     }
