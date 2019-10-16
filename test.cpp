@@ -1,11 +1,14 @@
 #include<iostream>
 #include<vector>
 #include<algorithm>
+#include<string>
 using namespace std;
 
 int main()
 {
-    for(int i=1; i> 0; ++i)
-        cout<<i<<endl;
+    int pos = 2;
+    int ans = 1;
+    ans = ans & pos;
+    cout<<ans<<endl;
     return 0;
 }
